@@ -64,8 +64,9 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] 
-      bg-contain bg-no-repeat ">
+      <div className="min-h-screen bg-contain bg-no-repeat  
+      bg-[url('./assets/images/bg-mobile-light.jpg')] bg-gray-300
+      dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] dark:bg-gray-800">
         <Header />
 
         <main className="container mx-auto mt-8 px-4">
@@ -90,7 +91,7 @@ function App() {
           />
         </main>
 
-        <footer className=" mt-8 text-center">
+        <footer className=" mt-8 text-center dark:text-gray-200">
           Drag Completed
         </footer>
       </div>

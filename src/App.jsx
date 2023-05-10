@@ -70,12 +70,16 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen bg-contain bg-no-repeat  
-      bg-[url('./assets/images/bg-mobile-light.jpg')] bg-gray-300
-      dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] dark:bg-gray-800">
+      <div className="min-h-screen bg-contain bg-no-repeat
+      bg-gray-300 dark:bg-gray-800
+      bg-[url('./assets/images/bg-mobile-light.jpg')] 
+      dark:bg-[url('./assets/images/bg-mobile-dark.jpg')]
+      md:bg-[url('./assets/images/bg-desktop-light.jpg')] 
+      md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]
+      ">
         <Header />
 
-        <main className="container mx-auto mt-8 px-4">
+        <main className="container mx-auto md:max-w-xl mt-8 px-4">
           <TodoCreate
             createTodo={createTodo}
           />

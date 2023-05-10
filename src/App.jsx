@@ -1,16 +1,18 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Header from "./components/Header"
 import TodoComputed from "./components/TodoComputed"
 import TodoCreate from "./components/TodoCreate"
 import TodoFilter from "./components/TodoFilter"
 import TodoList from "./components/TodoList"
 
-const initialStateTodos = [
-  { id: 1, title: "Go to the gym", completed: true },
-  { id: 2, title: "Eat breakfast.", completed: false },
-  { id: 3, title: "Exercise or do some physical activity.", completed: false },
-  { id: 4, title: "Relax or do a hobby before bed.", completed: false },
-];
+// const initialStateTodos = [
+//   { id: 1, title: "Go to the gym", completed: true },
+//   { id: 2, title: "Eat breakfast.", completed: false },
+//   { id: 3, title: "Exercise or do some physical activity.", completed: false },
+//   { id: 4, title: "Relax or do a hobby before bed.", completed: false },
+// ];
+
+const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || []; 
 
 function App() {
 
@@ -61,6 +63,10 @@ function App() {
   const changeFilter = (filter) => {
     setFilter(filter)
   };
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <>

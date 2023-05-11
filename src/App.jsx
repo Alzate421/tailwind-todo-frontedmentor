@@ -91,7 +91,7 @@ function App() {
       dark:bg-[url('./assets/images/bg-mobile-dark.jpg')]
       md:bg-[url('./assets/images/bg-desktop-light.jpg')] 
       md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]
-      ">
+      transition-all duration-1000">
         <Header />
 
         <main className="container mx-auto md:max-w-xl mt-8 px-4">
@@ -118,7 +118,7 @@ function App() {
           />
         </main>
 
-        <footer className=" mt-8 text-center dark:text-gray-200">
+        <footer className=" mt-8 text-center dark:text-gray-200 transition-all duration-1000">
           Drag Completed
         </footer>
       </div>

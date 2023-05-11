@@ -1,3 +1,5 @@
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+
 import { useEffect, useState } from "react"
 import Header from "./components/Header"
 import TodoComputed from "./components/TodoComputed"
@@ -5,14 +7,7 @@ import TodoCreate from "./components/TodoCreate"
 import TodoFilter from "./components/TodoFilter"
 import TodoList from "./components/TodoList"
 
-// const initialStateTodos = [
-//   { id: 1, title: "Go to the gym", completed: true },
-//   { id: 2, title: "Eat breakfast.", completed: false },
-//   { id: 3, title: "Exercise or do some physical activity.", completed: false },
-//   { id: 4, title: "Relax or do a hobby before bed.", completed: false },
-// ];
-
-const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || []; 
+const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [];
 
 function App() {
 
@@ -68,6 +63,26 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
+  const handleDragEnd = (result) => {
+    // console.log(result);
+    if (!result.destination) return;
+
+    console.log("origen: ", result.source.index);
+    console.log("fin: ", result.destination.index);
+
+    const startIndex = result.source.index;
+    const endIndex = result.destination.index;
+
+    const items = [...todos];
+    // con splice estamos eliminando un elemento del array y devolviendo ese elemento
+    const [reorderedItem] = items.splice(startIndex, 1);
+
+    // con splice estamos insertando un elemento en el array
+    items.splice(endIndex, 0, reorderedItem);
+
+    setTodos(items);
+  };
+
   return (
     <>
       <div className="min-h-screen bg-contain bg-no-repeat
@@ -84,11 +99,13 @@ function App() {
             createTodo={createTodo}
           />
 
-          <TodoList
-            todos={filteredTodos()}
-            removeTodo={removeTodo}
-            updateTodo={updateTodo}
-          />
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <TodoList
+              todos={filteredTodos()}
+              removeTodo={removeTodo}
+              updateTodo={updateTodo}
+            />
+          </DragDropContext>
 
           <TodoComputed
             computedItemsLeft={computedItemsLeft}
